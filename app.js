@@ -14,6 +14,10 @@ function initDAXQueryBuilder() {
 function executeDAXQuery() {
     const query = document.getElementById('dax-query').value;
     const result = document.getElementById('dax-result');
+    if (!query.trim()) {
+        result.textContent = "Errore: Inserire una query valida.";
+        return;
+    }
     // Simula l'esecuzione della query DAX
     result.textContent = `Query DAX eseguita: ${query}`;
 }
@@ -31,7 +35,13 @@ function initModelOptimizer() {
 }
 
 function analyzeModel() {
+    const fileInput = document.getElementById('model-upload');
     const result = document.getElementById('model-analysis-result');
+    if (!fileInput.files.length) {
+        result.textContent = "Errore: Nessun file selezionato.";
+        return;
+    }
+    // Simula l'analisi del modello
     result.textContent = "Analisi del modello completata. Nessuna ottimizzazione richiesta.";
 }
 
@@ -57,7 +67,34 @@ function translateFunction() {
     const input = document.getElementById('function-input').value;
     const lang = document.getElementById('lang-select').value;
     const result = document.getElementById('translation-result');
-    result.textContent = `Traduzione della funzione '${input}' in lingua '${lang}' completata.`;
+    if (!input.trim()) {
+        result.textContent = "Errore: Inserire una funzione valida.";
+        return;
+    }
+
+    const translations = {
+        "CERCA.VERT": {
+            en: "VLOOKUP",
+            it: "CERCA.VERT",
+            fr: "RECHERCHEV",
+            de: "SVERWEIS",
+            es: "BUSCARV"
+        },
+        "SOMMA": {
+            en: "SUM",
+            it: "SOMMA",
+            fr: "SOMME",
+            de: "SUMME",
+            es: "SUMA"
+        }
+    };
+
+    const translation = translations[input]?.[lang];
+    if (translation) {
+        result.textContent = `Traduzione della funzione '${input}' in lingua '${lang}': ${translation}`;
+    } else {
+        result.textContent = "Errore: Traduzione non trovata.";
+    }
 }
 
 // Visualizzatore Dati
@@ -73,7 +110,12 @@ function initDataVisualizer() {
 }
 
 function visualizeData() {
+    const fileInput = document.getElementById('data-upload');
     const result = document.getElementById('visualizer-result');
+    if (!fileInput.files.length) {
+        result.textContent = "Errore: Nessun file selezionato.";
+        return;
+    }
     result.textContent = "Visualizzazione dei dati completata.";
 }
 
@@ -91,6 +133,10 @@ function initFormulaValidator() {
 function validateFormula() {
     const formula = document.getElementById('formula-input').value;
     const result = document.getElementById('validation-result');
+    if (!formula.trim()) {
+        result.textContent = "Errore: Inserire una formula valida.";
+        return;
+    }
     result.textContent = `Formula '${formula}' valida.`;
 }
 
