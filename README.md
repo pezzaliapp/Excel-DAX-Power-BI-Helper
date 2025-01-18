@@ -79,4 +79,4 @@ Questo progetto è distribuito sotto la licenza MIT. Consulta il file `LICENSE` 
 
 ## Contatti
 
-Per domande o suggerimenti, contattaci a **support@example.com**.
+Per domande o suggerimenti, contattaci a **pezzalialessandro@gmail.com**.
