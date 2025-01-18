@@ -1,74 +1,98 @@
 // app.js
 
+// Funzione per il debug globale
+function logDebug(message) {
+    console.log(`DEBUG: ${message}`);
+}
+
 // Generatore di Query DAX
 function initDAXQueryBuilder() {
+    logDebug("Inizializzazione Generatore di Query DAX");
     const daxQueryBuilder = document.getElementById('dax-query-builder');
-    daxQueryBuilder.innerHTML = `
-        <h3>Generatore di Query DAX</h3>
-        <textarea id="dax-query" rows="6" placeholder="Scrivi la tua query DAX..."></textarea>
-        <button onclick="executeDAXQuery()">Esegui</button>
-        <pre id="dax-result">Risultato della query...</pre>
-    `;
+    if (daxQueryBuilder) {
+        daxQueryBuilder.innerHTML = `
+            <h3>Generatore di Query DAX</h3>
+            <textarea id="dax-query" rows="6" placeholder="Scrivi la tua query DAX..."></textarea>
+            <button onclick="executeDAXQuery()">Esegui</button>
+            <pre id="dax-result">Risultato della query...</pre>
+        `;
+    } else {
+        logDebug("Elemento dax-query-builder non trovato.");
+    }
 }
 
 function executeDAXQuery() {
+    logDebug("Esecuzione della query DAX");
     const query = document.getElementById('dax-query').value;
     const result = document.getElementById('dax-result');
     if (!query.trim()) {
         result.textContent = "Errore: Inserire una query valida.";
+        logDebug("Query DAX vuota.");
         return;
     }
-    // Simula l'esecuzione della query DAX
     result.textContent = `Query DAX eseguita: ${query}`;
 }
 
 // Ottimizzatore Modelli
 function initModelOptimizer() {
+    logDebug("Inizializzazione Ottimizzatore Modelli");
     const modelOptimizerTool = document.getElementById('model-optimizer');
-    modelOptimizerTool.innerHTML = `
-        <h3>Ottimizzatore Modelli</h3>
-        <p>Carica il tuo modello e ricevi suggerimenti di ottimizzazione.</p>
-        <input type="file" id="model-upload" />
-        <button onclick="analyzeModel()">Analizza Modello</button>
-        <div id="model-analysis-result">Risultati dell'analisi...</div>
-    `;
+    if (modelOptimizerTool) {
+        modelOptimizerTool.innerHTML = `
+            <h3>Ottimizzatore Modelli</h3>
+            <p>Carica il tuo modello e ricevi suggerimenti di ottimizzazione.</p>
+            <input type="file" id="model-upload" />
+            <button onclick="analyzeModel()">Analizza Modello</button>
+            <div id="model-analysis-result">Risultati dell'analisi...</div>
+        `;
+    } else {
+        logDebug("Elemento model-optimizer non trovato.");
+    }
 }
 
 function analyzeModel() {
+    logDebug("Analisi del modello avviata");
     const fileInput = document.getElementById('model-upload');
     const result = document.getElementById('model-analysis-result');
     if (!fileInput.files.length) {
         result.textContent = "Errore: Nessun file selezionato.";
+        logDebug("Nessun file selezionato per l'analisi.");
         return;
     }
-    // Simula l'analisi del modello
     result.textContent = "Analisi del modello completata. Nessuna ottimizzazione richiesta.";
 }
 
 // Traduttore Funzioni
 function initFunctionTranslator() {
+    logDebug("Inizializzazione Traduttore Funzioni");
     const functionTranslator = document.getElementById('function-translator');
-    functionTranslator.innerHTML = `
-        <h3>Traduttore Funzioni</h3>
-        <input type="text" id="function-input" placeholder="Inserisci una funzione..." />
-        <select id="lang-select">
-            <option value="en">Inglese</option>
-            <option value="it">Italiano</option>
-            <option value="fr">Francese</option>
-            <option value="de">Tedesco</option>
-            <option value="es">Spagnolo</option>
-        </select>
-        <button onclick="translateFunction()">Traduci</button>
-        <div id="translation-result">Risultato della traduzione...</div>
-    `;
+    if (functionTranslator) {
+        functionTranslator.innerHTML = `
+            <h3>Traduttore Funzioni</h3>
+            <input type="text" id="function-input" placeholder="Inserisci una funzione..." />
+            <select id="lang-select">
+                <option value="en">Inglese</option>
+                <option value="it">Italiano</option>
+                <option value="fr">Francese</option>
+                <option value="de">Tedesco</option>
+                <option value="es">Spagnolo</option>
+            </select>
+            <button onclick="translateFunction()">Traduci</button>
+            <div id="translation-result">Risultato della traduzione...</div>
+        `;
+    } else {
+        logDebug("Elemento function-translator non trovato.");
+    }
 }
 
 function translateFunction() {
+    logDebug("Traduzione della funzione avviata");
     const input = document.getElementById('function-input').value;
     const lang = document.getElementById('lang-select').value;
     const result = document.getElementById('translation-result');
     if (!input.trim()) {
         result.textContent = "Errore: Inserire una funzione valida.";
+        logDebug("Input della funzione vuoto.");
         return;
     }
 
@@ -92,77 +116,19 @@ function translateFunction() {
     const translation = translations[input]?.[lang];
     if (translation) {
         result.textContent = `Traduzione della funzione '${input}' in lingua '${lang}': ${translation}`;
+        logDebug(`Traduzione completata: ${translation}`);
     } else {
         result.textContent = "Errore: Traduzione non trovata.";
+        logDebug("Traduzione non trovata.");
     }
-}
-
-// Visualizzatore Dati
-function initDataVisualizer() {
-    const dataVisualizer = document.getElementById('data-visualizer');
-    dataVisualizer.innerHTML = `
-        <h3>Visualizzatore Dati</h3>
-        <p>Carica un file per visualizzare i dati.</p>
-        <input type="file" id="data-upload" />
-        <button onclick="visualizeData()">Visualizza</button>
-        <div id="visualizer-result">Nessun dato caricato...</div>
-    `;
-}
-
-function visualizeData() {
-    const fileInput = document.getElementById('data-upload');
-    const result = document.getElementById('visualizer-result');
-    if (!fileInput.files.length) {
-        result.textContent = "Errore: Nessun file selezionato.";
-        return;
-    }
-    result.textContent = "Visualizzazione dei dati completata.";
-}
-
-// Validatore Formule
-function initFormulaValidator() {
-    const formulaValidator = document.getElementById('formula-validator');
-    formulaValidator.innerHTML = `
-        <h3>Validatore Formule</h3>
-        <textarea id="formula-input" rows="4" placeholder="Inserisci la tua formula..."></textarea>
-        <button onclick="validateFormula()">Valida</button>
-        <div id="validation-result">Risultato della validazione...</div>
-    `;
-}
-
-function validateFormula() {
-    const formula = document.getElementById('formula-input').value;
-    const result = document.getElementById('validation-result');
-    if (!formula.trim()) {
-        result.textContent = "Errore: Inserire una formula valida.";
-        return;
-    }
-    result.textContent = `Formula '${formula}' valida.`;
-}
-
-// Esploratore Funzioni
-function initFunctionExplorer() {
-    const functionExplorer = document.getElementById('function-explorer');
-    functionExplorer.innerHTML = `
-        <h3>Esploratore Funzioni</h3>
-        <p>Consulta le funzioni supportate da Excel e DAX.</p>
-        <ul>
-            <li>SOMMA (SUM)</li>
-            <li>MEDIA (AVERAGE)</li>
-            <li>CERCA.VERT (VLOOKUP)</li>
-            <li>SE (IF)</li>
-        </ul>
-    `;
 }
 
 // Inizializzazione della PWA
 function initApp() {
+    logDebug("Inizializzazione dell'app PWA avviata");
     initDAXQueryBuilder();
     initModelOptimizer();
     initFunctionTranslator();
-    initDataVisualizer();
-    initFormulaValidator();
-    initFunctionExplorer();
 }
 
 // Attendere il caricamento del DOM
